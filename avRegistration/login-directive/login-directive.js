@@ -156,19 +156,22 @@ angular.module('avRegistration')
                   el.value = null;
                   el.disabled = false;
                 }
-                if (el.type === "email" && scope.email !== null) {
+                if (el.type === "email" && scope.email !== null && scope.method !== "sms") {
+                  console.log("Felix: email");
                   el.value = scope.email;
                   el.disabled = true;
                 } else if (el.type === "code" && scope.code !== null) {
                   el.value = scope.code.trim().toUpperCase();
                   el.disabled = true;
                 } else if (el.type === "tlf" && scope.method === "sms") {
+                  console.log("Felix: tlf");
                   scope.telIndex = index+1;
                   scope.telField = el;
                   
                   // check it's not an email but a telephone 
                   // (which is the only other possibility)
                   if (scope.email !== null && scope.email.indexOf('@') === -1) {
+                      console.log("Felix: tlf 2");
                     el.value = scope.email;
                     el.disabled = true;
                   }

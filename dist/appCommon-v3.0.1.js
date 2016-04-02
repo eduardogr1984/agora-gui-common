@@ -215,11 +215,11 @@ angular.module("avRegistration").factory("Authmethod", [ "$http", "$cookies", "C
             scope.telField = null;
             var fields = _.map(scope.login_fields, function(el, index) {
                 return scope.stateData[el.name] ? (el.value = scope.stateData[el.name], el.disabled = !0) : (el.value = null, 
-                el.disabled = !1), "email" === el.type && null !== scope.email ? (el.value = scope.email, 
-                el.disabled = !0) : "code" === el.type && null !== scope.code ? (el.value = scope.code.trim().toUpperCase(), 
-                el.disabled = !0) : "tlf" === el.type && "sms" === scope.method && (scope.telIndex = index + 1, 
-                scope.telField = el, null !== scope.email && -1 === scope.email.indexOf("@") && (el.value = scope.email, 
-                el.disabled = !0)), el;
+                el.disabled = !1), "email" === el.type && null !== scope.email && "sms" !== scope.method ? (console.log("Felix: email"), 
+                el.value = scope.email, el.disabled = !0) : "code" === el.type && null !== scope.code ? (el.value = scope.code.trim().toUpperCase(), 
+                el.disabled = !0) : "tlf" === el.type && "sms" === scope.method && (console.log("Felix: tlf"), 
+                scope.telIndex = index + 1, scope.telField = el, null !== scope.email && -1 === scope.email.indexOf("@") && (console.log("Felix: tlf 2"), 
+                el.value = scope.email, el.disabled = !0)), el;
             }), filled_fields = _.filter(fields, function(el) {
                 return null !== el.value;
             });
