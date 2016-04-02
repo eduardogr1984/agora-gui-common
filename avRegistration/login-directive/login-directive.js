@@ -165,6 +165,13 @@ angular.module('avRegistration')
                 } else if (el.type === "tlf" && scope.method === "sms") {
                   scope.telIndex = index+1;
                   scope.telField = el;
+                  
+                  // check it's not an email but a telephone 
+                  // (which is the only other possibility)
+                  if (scope.email !== null && scope.email.indexOf('@') === -1) {
+                    el.value = scope.email;
+                    el.disabled = true;
+                  }
                 }
                 return el;
               });
